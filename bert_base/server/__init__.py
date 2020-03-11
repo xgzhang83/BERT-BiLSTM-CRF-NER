@@ -100,6 +100,19 @@ class BertServer(threading.Thread):
                 self.logger.info('optimized graph is stored at: %s' % self.graph_path)
             else:
                 raise FileNotFoundError('graph optimization fails and returns empty result')
+        elif args.mode == 'ALBERT_NER':
+            self.logger.info('lodding albert ner model, could take a while...')
+            with Pool(processes=1) as pool:
+                # optimize the graph, must be done in another process
+                from .graph_albert import optimize_ner_model
+                num_labels, label2id, id2label = init_predict_var(self.args.model_dir)
+                self.num_labels = num_labels + 1
+                self.id2label = id2label
+                self.graph_path = pool.apply(optimize_ner_model, (self.args, self.num_labels))
+            if self.graph_path:
+                self.logger.info('optimized graph is stored at: %s' % self.graph_path)
+            else:
+                raise FileNotFoundError('graph optimization fails and returns empty result')
         elif args.mode == 'CLASS':
             self.logger.info('lodding classification predict, could take a while...')
             with Pool(processes=1) as pool:
@@ -169,7 +182,7 @@ class BertServer(threading.Thread):
                                      self.graph_path, self.args.mode)
                 self.processes.append(process)
                 process.start()
-            elif self.args.mode in ['NER', 'CLASS']:
+            elif self.args.mode in ['NER', 'ALBERT_NER', 'CLASS']:
                 process = BertWorker(idx, self.args, addr_backend_list, addr_sink, device_id,
                                      self.graph_path, self.args.mode, self.id2label)
                 self.processes.append(process)
@@ -337,6 +350,10 @@ class BertSink(Process):
                     arr_info, arr_val = jsonapi.loads(msg[1]), pickle.loads(msg[2])
                     pending_result[job_id].append((arr_val, partial_id))
                     pending_checksum[job_id] += len(arr_val)
+                elif self.args.mode == 'ALBERT_NER':
+                    arr_info, arr_val = jsonapi.loads(msg[1]), pickle.loads(msg[2])
+                    pending_result[job_id].append((arr_val, partial_id))
+                    pending_checksum[job_id] += len(arr_val)
                 elif self.args.mode == 'CLASS':
                     arr_info, arr_val = jsonapi.loads(msg[1]), pickle.loads(msg[2])
                     pending_result[job_id].append((arr_val, partial_id))
@@ -481,6 +498,8 @@ class BertWorker(Process):
         #     config.graph_options.optimizer_options.global_jit_level = tf.OptimizerOptions.ON_1
         if self.mode == 'NER':
             return Estimator(model_fn=ner_model_fn, config=RunConfig(session_config=config))
+        if self.mode == 'ALBERT_NER':
+            return Estimator(model_fn=ner_model_fn, config=RunConfig(session_config=config))
         elif self.mode == 'BERT':
             return Estimator(model_fn=model_fn, config=RunConfig(session_config=config))
         elif self.mode == 'CLASS':
@@ -512,7 +531,12 @@ class BertWorker(Process):
             elif self.mode == 'NER':
                 pred_label_result, pred_ids_result = ner_result_to_json(r['encodes'], self.id2label)
                 rst = send_ndarray(sink, r['client_id'], pred_label_result)
-                # print('rst:', rst)
+                print('rst:', pred_label_result)
+                logger.info('job done\tsize: %s\tclient: %s' % (r['encodes'].shape, r['client_id']))
+            elif self.mode == 'ALBERT_NER':
+                pred_label_result, pred_ids_result = ner_result_to_json(r['encodes'], self.id2label)
+                rst = send_ndarray(sink, r['client_id'], pred_label_result)
+                print('rst:', pred_label_result)
                 logger.info('job done\tsize: %s\tclient: %s' % (r['encodes'].shape, r['client_id']))
             elif self.mode == 'CLASS':
                 pred_label_result = [self.id2label.get(x, -1) for x in r['encodes']]

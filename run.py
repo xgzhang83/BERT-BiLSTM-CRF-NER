@@ -11,6 +11,7 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
+import sys
 
 
 def start_server():
@@ -56,6 +57,13 @@ if __name__ == '__main__':
     """
     如果想训练，那么直接 指定参数跑，如果想启动服务，那么注释掉train,打开server即可
     """
-    #train_ner()
-    train_albert_ner()
-    #start_server()
+    if sys.argv[1] == 'TRAIN':
+        sys.argv.pop(1)
+        train_ner()
+    elif sys.argv[1] == 'TRAIN_ALBERT':
+        sys.argv.pop(1)
+        train_albert_ner()
+    elif sys.argv[1] == 'RUN':
+        sys.argv.pop(1)
+        start_server()
+

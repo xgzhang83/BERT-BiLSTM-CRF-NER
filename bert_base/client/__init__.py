@@ -150,7 +150,7 @@ class BertClient(object):
 
     def _recv_ndarray(self):
         request_id, response = self._recv()
-        if self.mode == 'NER':
+        if self.mode == 'NER' or self.mode== 'ALBERT_NER':
             arr_info, arr_val = jsonapi.loads(response[1]), pickle.loads(response[2])
             assert arr_info['dtype'] == 'str'
             return Response(request_id, arr_val)
