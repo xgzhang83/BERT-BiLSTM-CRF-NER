@@ -617,12 +617,12 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
       label_map[label] = i
 
   # 保存label->index 的map
-  if not output_dir:
-    if not os.path.exists(os.path.join(output_dir, 'label2id.pkl')):
-        with open(os.path.join(output_dir, 'label2id.pkl'), 'wb') as w:
-            pickle.dump(label_map, w)
-  
-        print("label map: {}".format(label_map))
+  pkl_file = os.path.join(output_dir, './label2id.pkl')
+  if not os.path.exists(pkl_file):
+    with open(pkl_file, 'wb') as w:
+       pickle.dump(label_map, w)
+
+    print("label map: {}".format(label_map))
 
   tokens_a = tokenizer.tokenize(example.text_a)
   tokens_b = None
