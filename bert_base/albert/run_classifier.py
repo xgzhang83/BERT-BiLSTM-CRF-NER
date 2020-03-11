@@ -20,10 +20,10 @@ from __future__ import print_function
 
 import os
 import time
-import classifier_utils
-import fine_tuning_utils
-import modeling
-import tokenization
+from bert_base.albert import classifier_utils
+from bert_base.albert import fine_tuning_utils
+from bert_base.albert import modeling
+from bert_base.albert import tokenization
 import tensorflow.compat.v1 as tf
 from tensorflow.contrib import cluster_resolver as contrib_cluster_resolver
 from tensorflow.contrib import tpu as contrib_tpu
@@ -156,6 +156,7 @@ def main(_):
       "qqp": classifier_utils.QqpProcessor,
       "qnli": classifier_utils.QnliProcessor,
       "wnli": classifier_utils.WnliProcessor,
+      "rasa": classifier_utils.RasaProcessor,
   }
 
   tokenization.validate_case_matches_checkpoint(FLAGS.do_lower_case,
@@ -191,7 +192,10 @@ def main(_):
       use_spm=True if FLAGS.spm_model_file else False,
       do_lower_case=FLAGS.do_lower_case)
 
-  label_list = processor.get_labels()
+  if task_name == "rasa":
+    label_list = processor.get_labels(FLAGS.data_dir)
+  else:
+    label_list = processor.get_labels()
 
   tokenizer = fine_tuning_utils.create_vocab(
       vocab_file=FLAGS.vocab_file,
@@ -255,7 +259,7 @@ def main(_):
     if not tf.gfile.Exists(train_file):
       classifier_utils.file_based_convert_examples_to_features(
           train_examples, label_list, FLAGS.max_seq_length, tokenizer,
-          train_file, task_name)
+          train_file, task_name, FLAGS.output_dir)
     tf.logging.info("***** Running training *****")
     tf.logging.info("  Num examples = %d", len(train_examples))
     tf.logging.info("  Batch size = %d", FLAGS.train_batch_size)
@@ -487,6 +491,6 @@ def main(_):
 if __name__ == "__main__":
   flags.mark_flag_as_required("data_dir")
   flags.mark_flag_as_required("task_name")
-  flags.mark_flag_as_required("spm_model_file")
+  #flags.mark_flag_as_required("spm_model_file")
   flags.mark_flag_as_required("output_dir")
   tf.app.run()

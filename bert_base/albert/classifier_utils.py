@@ -21,10 +21,11 @@ from __future__ import print_function
 import collections
 import csv
 import os
-import fine_tuning_utils
-import modeling
-import optimization
-import tokenization
+import pickle
+from bert_base.albert import fine_tuning_utils
+from bert_base.albert import modeling
+from bert_base.albert import optimization
+from bert_base.albert import tokenization
 import tensorflow.compat.v1 as tf
 from tensorflow.contrib import data as contrib_data
 from tensorflow.contrib import metrics as contrib_metrics
@@ -183,6 +184,50 @@ class MisMnliProcessor(MnliProcessor):
     return self._create_examples(
         self._read_tsv(os.path.join(data_dir, "MNLI", "test_mismatched.tsv")),
         "test")
+
+class RasaProcessor(DataProcessor):
+  """Processor for the MRPC data set (GLUE version)."""
+
+  def get_train_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_tsv(os.path.join(data_dir, "train.tsv")), "train")
+
+  def get_dev_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev")
+
+  def get_test_examples(self, data_dir):
+    """See base class."""
+    return self._create_examples(
+        self._read_tsv(os.path.join(data_dir, "test.tsv")), "test")
+
+  def get_labels(self, data_dir):
+    """See base class."""
+    # 通过读取train文件获取标签的方法会出现一定的风险。
+    if os.path.exists(os.path.join(data_dir, 'label_list.pkl')):
+        with open(os.path.join(data_dir, 'label_list.pkl'), 'rb') as rf:
+            self.labels = pickle.load(rf)
+    else:
+        self.labels = ["O", 'B-TIM', 'I-TIM', "B-PER", "I-PER", "B-ORG", "I-ORG", "B-LOC", "I-LOC", "X", "[CLS]", "[SEP]"]
+    return self.labels
+
+  def _create_examples(self, lines, set_type):
+    """Creates examples for the training and dev sets."""
+    examples = []
+    for (i, line) in enumerate(lines):
+      if i == 0:
+        continue
+      guid = "%s-%s" % (set_type, i)
+      text_a = tokenization.convert_to_unicode(line[3])
+      if set_type == "test":
+        label = "重来"
+      else:
+        label = tokenization.convert_to_unicode(line[0])
+      examples.append(
+          InputExample(guid=guid, text_a=text_a, label=label))
+    return examples
 
 
 class MrpcProcessor(DataProcessor):
@@ -555,7 +600,7 @@ class AXProcessor(DataProcessor):
 
 
 def convert_single_example(ex_index, example, label_list, max_seq_length,
-                           tokenizer, task_name):
+                           tokenizer, task_name, output_dir=None):
   """Converts a single `InputExample` into a single `InputFeatures`."""
 
   if isinstance(example, PaddingInputExample):
@@ -570,6 +615,14 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
     label_map = {}
     for (i, label) in enumerate(label_list):
       label_map[label] = i
+
+  # 保存label->index 的map
+  if not output_dir:
+    if not os.path.exists(os.path.join(output_dir, 'label2id.pkl')):
+        with open(os.path.join(output_dir, 'label2id.pkl'), 'wb') as w:
+            pickle.dump(label_map, w)
+  
+        print("label map: {}".format(label_map))
 
   tokens_a = tokenizer.tokenize(example.text_a)
   tokens_b = None
@@ -662,7 +715,7 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
 
 
 def file_based_convert_examples_to_features(
-    examples, label_list, max_seq_length, tokenizer, output_file, task_name):
+    examples, label_list, max_seq_length, tokenizer, output_file, task_name, output_dir=None):
   """Convert a set of `InputExample`s to a TFRecord file."""
 
   writer = tf.python_io.TFRecordWriter(output_file)
@@ -672,7 +725,7 @@ def file_based_convert_examples_to_features(
       tf.logging.info("Writing example %d of %d" % (ex_index, len(examples)))
 
     feature = convert_single_example(ex_index, example, label_list,
-                                     max_seq_length, tokenizer, task_name)
+                                     max_seq_length, tokenizer, task_name, output_dir)
 
     def create_int_feature(values):
       f = tf.train.Feature(int64_list=tf.train.Int64List(value=list(values)))
