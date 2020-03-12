@@ -1,14 +1,14 @@
-processed 13761 tokens with 2184 phrases; found: 2218 phrases; correct: 2143.
-accuracy:  99.53%; precision:  96.62%; recall:  98.12%; FB1:  97.36
+processed 13773 tokens with 2184 phrases; found: 2192 phrases; correct: 2162.
+accuracy:  99.50%; precision:  98.63%; recall:  98.99%; FB1:  98.81
               act: precision: 100.00%; recall: 100.00%; FB1: 100.00  64
-            brand: precision:  98.90%; recall: 100.00%; FB1:  99.45  817
-              day: precision: 100.00%; recall: 100.00%; FB1: 100.00  40
-         location: precision:   0.00%; recall:   0.00%; FB1:   0.00  27
+            brand: precision: 100.00%; recall: 100.00%; FB1: 100.00  808
+              day: precision:  72.73%; recall: 100.00%; FB1:  84.21  55
+         location: precision: 100.00%; recall: 100.00%; FB1: 100.00  27
              next: precision:   0.00%; recall:   0.00%; FB1:   0.00  0
           overdue: precision:   0.00%; recall:   0.00%; FB1:   0.00  0
-         question: precision: 100.00%; recall: 100.00%; FB1: 100.00  8
-             room: precision:  87.67%; recall: 100.00%; FB1:  93.43  73
-         someitem: precision:  38.64%; recall: 100.00%; FB1:  55.74  44
-          teaName: precision: 100.00%; recall: 100.00%; FB1: 100.00  437
-             what: precision:   0.00%; recall:   0.00%; FB1:   0.00  0
-             year: precision:  99.58%; recall: 100.00%; FB1:  99.79  708
+         question: precision:   0.00%; recall:   0.00%; FB1:   0.00  0
+             room: precision: 100.00%; recall: 100.00%; FB1: 100.00  64
+         someitem: precision: 100.00%; recall: 100.00%; FB1: 100.00  17
+          teaName: precision:  97.76%; recall: 100.00%; FB1:  98.87  447
+             what: precision:   0.00%; recall:   0.00%; FB1:   0.00  5
+             year: precision: 100.00%; recall: 100.00%; FB1: 100.00  705
