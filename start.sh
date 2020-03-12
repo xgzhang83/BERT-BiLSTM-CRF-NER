@@ -29,21 +29,23 @@ if [ $# -eq 2 ]; then
             python3 -m bert_base.albert.run_classifier \
                 --output_dir="./albert_class_output" \
                 --data_dir="./rasa_data/classifier_data" \
-                --init_checkpoint="" \
+                --init_checkpoint="$ALBERT_MODEL_DIR/model.ckpt-best" \
                 --albert_config_file="$ALBERT_MODEL_DIR/albert_config.json" \
                 --vocab_file="$ALBERT_MODEL_DIR/vocab.txt" \
                 --do_lower_case \
                 --max_seq_length=128 \
                 --optimizer=adamw \
                 --task_name=RASA \
-                --warmup_step=200 \
                 --train_step=1000 \
-                --learning_rate=2e-5 \
                 --save_checkpoints_steps=500 \
                 --train_batch_size=32 \
                 --do_train \
                 --nodo_eval \
                 --nodo_predict
+
+#                --warmup_step=200 \
+#                --learning_rate=2e-5 \
+
         fi
     fi
 
