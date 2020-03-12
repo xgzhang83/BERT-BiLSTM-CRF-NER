@@ -1,6 +1,7 @@
 #!/bin/bash
 export BERT_MODEL_DIR=/home/wrd/bert/bert/chinese_L-12_H-768_A-12
 export ALBERT_MODEL_DIR=/home/wrd/albert/albert_base_zh
+export ZEROMQ_SOCK_TMP_DIR=/tmp
 
 if [ $# -eq 2 ]; then
     if [ $1 == "train" ]; then
