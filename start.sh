@@ -19,7 +19,7 @@ if [ $# -eq 2 ]; then
         if [ $2 == "albert_ner" ]; then
             python run.py \
                 TRAIN_ALBERT \
-                -batch_size 16 \
+                -batch_size 32 \
                 -data_dir ./rasa_data/ner_data \
                 -output_dir ./albert_ner_output/ \
                 -init_checkpoint $ALBERT_MODEL_DIR/model.ckpt-best \

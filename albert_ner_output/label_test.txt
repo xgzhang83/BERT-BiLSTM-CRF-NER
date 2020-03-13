@@ -57,9 +57,9 @@ O O O
 对 O O
 。 O O
 
-可 B-what B-day
-乐 I-what I-day
-瓶 I-what I-teaName
+可 B-what I-what
+乐 I-what I-what
+瓶 I-what I-what
 是 O O
 哪 O O
 种 O O
@@ -67,9 +67,9 @@ O O O
 圾 O O
 。 O O
 
-大 B-what B-day
-棒 I-what I-day
-骨 I-what I-teaName
+大 B-what I-what
+棒 I-what I-what
+骨 I-what I-what
 是 O O
 什 O O
 么 O O
@@ -77,8 +77,8 @@ O O O
 圾 O O
 。 O O
 
-牛 B-what B-day
-骨 I-what B-day
+牛 B-what I-what
+骨 I-what I-what
 是 O O
 什 O O
 么 O O
@@ -86,9 +86,9 @@ O O O
 圾 O O
 。 O O
 
-啤 B-what B-day
-酒 I-what I-day
-瓶 I-what I-teaName
+啤 B-what I-what
+酒 I-what I-what
+瓶 I-what I-what
 属 O O
 于 O O
 什 O O
@@ -97,8 +97,8 @@ O O O
 圾 O O
 。 O O
 
-鸡 B-what B-day
-骨 I-what B-day
+鸡 B-what I-what
+骨 I-what I-what
 属 O O
 于 O O
 哪 O O
@@ -107,9 +107,9 @@ O O O
 圾 O O
 。 O O
 
-西 B-what B-day
-瓜 I-what I-day
-皮 I-what I-teaName
+西 B-what I-what
+瓜 I-what I-what
+皮 I-what I-what
 属 O O
 于 O O
 什 O O
@@ -118,9 +118,9 @@ O O O
 圾 O O
 。 O O
 
-西 B-what B-day
-瓜 I-what I-day
-皮 I-what I-teaName
+西 B-what I-what
+瓜 I-what I-what
+皮 I-what I-what
 属 O O
 于 O O
 哪 O O
@@ -129,8 +129,8 @@ O O O
 圾 O O
 。 O O
 
-鸡 B-what B-day
-骨 I-what B-day
+鸡 B-what I-what
+骨 I-what I-what
 是 O O
 什 O O
 么 O O
@@ -138,9 +138,9 @@ O O O
 圾 O O
 。 O O
 
-西 B-what B-day
-瓜 I-what I-day
-皮 I-what I-teaName
+西 B-what I-what
+瓜 I-what I-what
+皮 I-what I-what
 是 O O
 哪 O O
 种 O O
@@ -148,9 +148,9 @@ O O O
 圾 O O
 。 O O
 
-西 B-what B-day
-瓜 I-what I-day
-皮 I-what I-teaName
+西 B-what I-what
+瓜 I-what I-what
+皮 I-what I-what
 算 O O
 哪 O O
 种 O O
@@ -158,7 +158,7 @@ O O O
 圾 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 后 B-day B-day
 儿 I-day I-day
@@ -191,7 +191,7 @@ O O O
 样 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 前 B-day B-day
 天 I-day I-day
@@ -202,7 +202,7 @@ O O O
 何 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 明 B-day B-day
 天 I-day I-day
@@ -226,7 +226,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 前 B-day B-day
 天 I-day I-day
@@ -301,7 +301,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 今 B-day B-day
 天 I-day I-day
@@ -345,7 +345,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 明 B-day B-day
 儿 I-day I-day
@@ -368,7 +368,7 @@ O O O
 何 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 明 B-day B-day
 天 I-day I-day
@@ -424,7 +424,7 @@ O O O
 样 O O
 。 O O
 
-上 B-location B-location
+上 B-location I-location
 海 I-location I-location
 明 B-day B-day
 儿 I-day I-day
@@ -469,7 +469,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 今 B-day B-day
 天 I-day I-day
@@ -480,7 +480,7 @@ O O O
 何 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 昨 B-day B-day
 天 I-day I-day
@@ -492,7 +492,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 后 B-day B-day
 儿 I-day I-day
@@ -504,7 +504,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 今 B-day B-day
 天 I-day I-day
@@ -526,7 +526,7 @@ O O O
 何 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 今 B-day B-day
 天 I-day I-day
@@ -538,7 +538,7 @@ O O O
 好 O O
 。 O O
 
-北 B-location B-location
+北 B-location I-location
 京 I-location I-location
 明 B-day B-day
 儿 I-day I-day
@@ -582,21 +582,20 @@ O O O
 样 O O
 。 O O
 
-接 B-next B-day
-下 I-next I-day
-来 I-next I-teaName
+接 B-next I-someitem
+下 I-next O
+来 I-next O
 还 O O
 有 O O
 什 O O
 么 O O
-。 O O
 
 有 O O
 哪 O O
 些 O O
 事 O O
 忘 B-overdue O
-了 I-overdue I-teaName
+了 I-overdue O
 。 O O
 
 昨 B-day B-day
@@ -615,9 +614,9 @@ O O O
 做 I-overdue O
 。 O O
 
-接 B-next B-day
-下 I-next I-day
-来 I-next I-teaName
+接 B-next B-brand
+下 I-next I-brand
+来 I-next I-what
 还 O O
 有 O O
 什 O O
@@ -14366,75 +14365,75 @@ O O O
 
 后 B-someitem B-someitem
 者 I-someitem I-someitem
-花 B-question I-what
-了 I-question O
-多 I-question O
-少 I-question O
-钱 I-question O
+花 B-question I-question
+了 I-question I-question
+多 I-question I-question
+少 I-question I-question
+钱 I-question I-question
 。 O O
 
 第 B-someitem B-someitem
 二 I-someitem I-someitem
 个 I-someitem I-someitem
-花 B-question I-what
-了 I-question O
-多 I-question O
-少 I-question O
-钱 I-question O
+花 B-question I-question
+了 I-question I-question
+多 I-question I-question
+少 I-question I-question
+钱 I-question I-question
 。 O O
 
 第 B-someitem B-someitem
 2 I-someitem I-someitem
 个 I-someitem I-someitem
-花 B-question I-what
-了 I-question O
-多 I-question O
-少 I-question O
-钱 I-question O
+花 B-question I-question
+了 I-question I-question
+多 I-question I-question
+少 I-question I-question
+钱 I-question I-question
 。 O O
 
 最 B-someitem B-someitem
 后 I-someitem I-someitem
 那 I-someitem I-someitem
 个 I-someitem I-someitem
-有 B-question O
-多 I-question O
-少 I-question O
+有 B-question I-question
+多 I-question I-question
+少 I-question I-question
 。 O O
 
 第 B-someitem B-someitem
 1 I-someitem I-someitem
 个 I-someitem I-someitem
-有 B-question O
-多 I-question O
-少 I-question O
+有 B-question I-question
+多 I-question I-question
+少 I-question I-question
 。 O O
 
 最 B-someitem B-someitem
 后 I-someitem I-someitem
 那 I-someitem I-someitem
 个 I-someitem I-someitem
-买 B-question I-what
-了 I-question O
-多 I-question O
-少 I-question O
+买 B-question I-question
+了 I-question I-question
+多 I-question I-question
+少 I-question I-question
 。 O O
 
 第 B-someitem B-someitem
 3 I-someitem I-someitem
 个 I-someitem I-someitem
-买 B-question I-what
-了 I-question O
-多 I-question O
-少 I-question O
+买 B-question I-question
+了 I-question I-question
+多 I-question I-question
+少 I-question I-question
 。 O O
 
 第 B-someitem B-someitem
 2 I-someitem I-someitem
 个 I-someitem I-someitem
-有 B-question O
-多 I-question O
-少 I-question O
+有 B-question I-question
+多 I-question I-question
+少 I-question I-question
 。 O O
 
 开 B-act B-act
