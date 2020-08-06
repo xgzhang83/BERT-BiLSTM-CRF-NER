@@ -16,6 +16,21 @@ if [ $# -eq 2 ]; then
                 -vocab_file $BERT_MODEL_DIR/vocab.txt 
         fi
 
+        if [ $2 == "class" ]; then
+            python run.py \
+                TRAIN_CLASS \
+                -output_dir "./bert_class_output" \
+                -data_dir "./rasa_data/classifier_data" \
+                -init_checkpoint "$BERT_MODEL_DIR/bert_model.ckpt" \
+                -bert_config_file "$BERT_MODEL_DIR/bert_config.json" \
+                -vocab_file "$BERT_MODEL_DIR/vocab.txt" \
+                -max_seq_length 128 \
+                -ner RASA \
+                -save_checkpoints_steps 500 \
+                -batch_size 32
+
+        fi
+
         if [ $2 == "albert_ner" ]; then
             python run.py \
                 TRAIN_ALBERT \

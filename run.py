@@ -53,6 +53,20 @@ def train_albert_ner():
     os.environ['CUDA_VISIBLE_DEVICES'] = args.device_map
     train(args=args)
 
+def train_bert_class():
+    import os
+    from bert_base.train.train_helper import get_args_parser
+    from bert_base.train.bert_classifier import train
+
+    args = get_args_parser()
+    if True:
+        import sys
+        param_str = '\n'.join(['%20s = %s' % (k, v) for k, v in sorted(vars(args).items())])
+        print('usage: %s\n%20s   %s\n%s\n%s\n' % (' '.join(sys.argv), 'ARG', 'VALUE', '_' * 50, param_str))
+    print(args)
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.device_map
+    train(args)
+
 if __name__ == '__main__':
     """
     如果想训练，那么直接 指定参数跑，如果想启动服务，那么注释掉train,打开server即可
@@ -60,6 +74,9 @@ if __name__ == '__main__':
     if sys.argv[1] == 'TRAIN':
         sys.argv.pop(1)
         train_ner()
+    elif sys.argv[1] == 'TRAIN_CLASS':
+        sys.argv.pop(1)
+        train_bert_class()
     elif sys.argv[1] == 'TRAIN_ALBERT':
         sys.argv.pop(1)
         train_albert_ner()

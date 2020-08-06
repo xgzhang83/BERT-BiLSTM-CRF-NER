@@ -82,4 +82,14 @@ def get_args_parser():
                         help='turn on tensorflow logging for debug')
     parser.add_argument('-ner', type=str, default='ner', help='which modle to train')
     parser.add_argument('-version', action='version', version='%(prog)s ' + __version__)
+    group2.add_argument('-use_tpu', type=bool, default=False,
+                        help='Whether to use tpu.')
+    group2.add_argument('-tpu_name', type=str, default=None,
+                        help='cloud tpu to use.')
+    group2.add_argument('-master', type=str, default=None,
+                        help='tensorflow master URL.')
+    group2.add_argument('-iterations_per_loop', type=int, default=1000,
+                        help='How many steps to make in each estimator call.')
+    group2.add_argument('-num_tpu_cores', type=int, default=8,
+                        help='Only used if `use_tpu` is True..')
     return parser.parse_args()
