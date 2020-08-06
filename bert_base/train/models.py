@@ -141,7 +141,7 @@ def create_albert_model(bert_config, is_training, input_ids, input_mask,
     rst = blstm_crf.add_blstm_crf_layer(crf_only=True)
     return rst
 
-def create_classification_model(bert_config, is_training, input_ids, input_mask, segment_ids, labels, num_labels, use_one_hot_embeddings):
+def create_classification_model(bert_config, is_training, input_ids, input_mask, segment_ids, labels, num_labels, use_one_hot_embeddings=False):
     """
 
     :param bert_config:
