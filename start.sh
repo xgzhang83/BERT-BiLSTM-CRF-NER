@@ -83,8 +83,8 @@ if [ $# -eq 2 ]; then
             python run.py \
                 RUN \
                 -bert_model_dir $BERT_MODEL_DIR \
-                -model_dir ./try_output/ \
-                -model_pb_dir ./try_output/ \
+                -model_dir ./bert_class_output/ \
+                -model_pb_dir ./bert_class_output/ \
                 -port 5555 \
                 -port_out 5556 \
                 -num_worker 1 \
